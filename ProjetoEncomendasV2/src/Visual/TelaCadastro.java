@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
@@ -15,6 +16,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JComboBox;
+import javax.swing.JButton;
+import javax.swing.border.EtchedBorder;
+import java.awt.event.ActionListener;
+import java.io.Closeable;
+import java.awt.event.ActionEvent;
 
 public class TelaCadastro extends JFrame {
 
@@ -33,25 +39,14 @@ public class TelaCadastro extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCadastro frame = new TelaCadastro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
 	 */
 	public TelaCadastro() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 449, 518);
+		setBounds(100, 100, 449, 400);
 		Painel = new JPanel();
 		Painel.setBackground(new Color(240, 240, 240));
 		Painel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -60,6 +55,7 @@ public class TelaCadastro extends JFrame {
 		Painel.setLayout(null);
 		
 		JPanel PainelTitulo = new JPanel();
+		PainelTitulo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		PainelTitulo.setBackground(new Color(60, 179, 113));
 		PainelTitulo.setBounds(10, 11, 413, 41);
 		Painel.add(PainelTitulo);
@@ -223,24 +219,67 @@ public class TelaCadastro extends JFrame {
 		textField_5.setBounds(85, 9, 318, 20);
 		PainelContato.add(textField_5);
 		
+		JPanel panel_1_1_1_1_2_2 = new JPanel();
+		panel_1_1_1_1_2_2.setBackground(new Color(124, 252, 0));
+		panel_1_1_1_1_2_2.setBounds(0, 64, 413, 3);
+		PainelContato.add(panel_1_1_1_1_2_2);
+		
+		JPanel panel_1_1_1_1_1_2 = new JPanel();
+		panel_1_1_1_1_1_2.setBackground(new Color(124, 252, 0));
+		panel_1_1_1_1_1_2.setBounds(0, 70, 413, 3);
+		PainelContato.add(panel_1_1_1_1_1_2);
+		
 		JPanel panel_1_1_1_1_2 = new JPanel();
+		panel_1_1_1_1_2.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_1_1_1_1_2.setBackground(new Color(124, 252, 0));
 		panel_1_1_1_1_2.setBounds(10, 245, 413, 3);
 		Painel.add(panel_1_1_1_1_2);
 		
 		JPanel panel_1_1_1_1_1 = new JPanel();
+		panel_1_1_1_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_1_1_1_1_1.setBounds(10, 251, 413, 3);
 		Painel.add(panel_1_1_1_1_1);
 		panel_1_1_1_1_1.setBackground(new Color(124, 252, 0));
 		
 		JPanel panel_1_1_1_1_1_1 = new JPanel();
+		panel_1_1_1_1_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_1_1_1_1_1_1.setBackground(new Color(124, 252, 0));
 		panel_1_1_1_1_1_1.setBounds(10, 146, 413, 3);
 		Painel.add(panel_1_1_1_1_1_1);
 		
 		JPanel panel_1_1_1_1_2_1 = new JPanel();
+		panel_1_1_1_1_2_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_1_1_1_1_2_1.setBackground(new Color(124, 252, 0));
 		panel_1_1_1_1_2_1.setBounds(10, 140, 413, 3);
 		Painel.add(panel_1_1_1_1_2_1);
+		
+		JPanel panel_1_1_1_1_1_3 = new JPanel();
+		panel_1_1_1_1_1_3.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_1_1_1_1_1_3.setBackground(new Color(124, 252, 0));
+		panel_1_1_1_1_1_3.setBounds(10, 327, 413, 3);
+		Painel.add(panel_1_1_1_1_1_3);
+		panel_1_1_1_1_1_3.setLayout(null);
+		
+		JPanel panel_1_1_1_1_2_3 = new JPanel();
+		panel_1_1_1_1_2_3.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_1_1_1_1_2_3.setBackground(new Color(124, 252, 0));
+		panel_1_1_1_1_2_3.setBounds(10, 321, 413, 3);
+		Painel.add(panel_1_1_1_1_2_3);
+		
+		JButton BTNCadastrar = new JButton("Cadastrar");
+		BTNCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+
+				JOptionPane.showMessageDialog(BTNCadastrar, "Cadastrado com Sucesso!" +" "+ "Retornando a página de Login...");
+				Login L = new Login();
+				L.setVisible(true);
+			
+				
+				
+			}
+		});
+		BTNCadastrar.setBounds(176, 332, 98, 23);
+		Painel.add(BTNCadastrar);
 	}
 }

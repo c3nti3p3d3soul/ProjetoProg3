@@ -11,6 +11,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JDesktopPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import java.awt.Canvas;
 
 public class Principal extends JFrame {
 
@@ -19,18 +22,7 @@ public class Principal extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Principal frame = new Principal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -118,9 +110,10 @@ public class Principal extends JFrame {
 		setContentPane(frmProjetoEncomendas);
 		frmProjetoEncomendas.setLayout(null);
 		
-		JDesktopPane desktopPane = new JDesktopPane();
-		desktopPane.setBounds(4, 410, 620, -410);
-		frmProjetoEncomendas.add(desktopPane);
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 1034, 599);
+		frmProjetoEncomendas.add(panel);
+		panel.setLayout(null);
 		
 		
 		

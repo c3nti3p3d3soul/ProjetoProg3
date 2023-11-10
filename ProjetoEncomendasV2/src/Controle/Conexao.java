@@ -8,7 +8,7 @@ public class Conexao {
     public static Connection getConnection() {
         String url = "jdbc:postgresql://localhost:5432/ProjetoProg3";
         String user = "postgres";
-        String password = "postgres";
+        String password = "root";
 
         try {
             // Carregando o driver JDBC

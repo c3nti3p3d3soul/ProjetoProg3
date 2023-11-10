@@ -58,7 +58,7 @@ public class TelaVenda extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(null);
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(new Color(32, 178, 170));
 		panel.setBounds(0, 0, 624, 35);
 		contentPane.add(panel);
@@ -71,6 +71,7 @@ public class TelaVenda extends JFrame {
 		panel.add(Carrinho);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_1.setLayout(null);
 		panel_1.setBackground(new Color(32, 178, 170));
 		panel_1.setBounds(0, 420, 624, 41);
@@ -128,12 +129,12 @@ public class TelaVenda extends JFrame {
 		JLabel Precototal = new JLabel("R$");
 		Precototal.setFont(new Font("Verdana", Font.PLAIN, 15));
 		Precototal.setHorizontalAlignment(SwingConstants.CENTER);
-		Precototal.setBounds(66, 150, 105, 14);
+		Precototal.setBounds(76, 144, 105, 22);
 		Pagamento.add(Precototal);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Á vista()", "Crédito Parcelado", "1x de", "2x de", "3x de"}));
-		comboBox.setBounds(10, 36, 161, 22);
+		comboBox.setBounds(10, 25, 161, 22);
 		Pagamento.add(comboBox);
 		
 		table = new JTable();

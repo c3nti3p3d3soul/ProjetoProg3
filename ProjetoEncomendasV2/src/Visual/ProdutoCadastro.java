@@ -17,6 +17,10 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.SwingConstants;
@@ -25,9 +29,12 @@ import javax.swing.table.DefaultTableModel;
 
 import org.ietf.jgss.ChannelBinding;
 
+import Controle.Conexao;
+
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.border.LineBorder;
 
 public class ProdutoCadastro extends ProdutoLista {
 	ProdutoLista PL = new ProdutoLista();
@@ -56,24 +63,87 @@ public class ProdutoCadastro extends ProdutoLista {
 		
 		setTitle("Cadastrar Produto");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 950, 450);
+		setBounds(100, 100, 935, 520);
 		contentPane = new JPanel();
 		contentPane.setBorder(null);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel PainelSalvar = new JPanel();
-		PainelSalvar.setBackground(new Color(143, 188, 143));
-		PainelSalvar.setBounds(0, 0, 934, 33);
-		contentPane.add(PainelSalvar);
-		PainelSalvar.setLayout(null);
-		
 		JComboBox CBCateg = new JComboBox();
+		CBCateg.setBounds(219, 4, 76, 22);
 		
-		JButton BTNCadastrar = new JButton("");
-		BTNCadastrar.setBounds(10, 0, 32, 32);
-		PainelSalvar.add(BTNCadastrar);
+		JPanel PainelCad = new JPanel();
+		PainelCad.setBorder(new LineBorder(new Color(0, 0, 0)));
+		PainelCad.setBackground(new Color(143, 188, 143));
+		PainelCad.setBounds(0, 422, 920, 59);
+		contentPane.add(PainelCad);
+		PainelCad.setLayout(null);
+		
+		JLabel LBnome = new JLabel("Nome");
+		LBnome.setBounds(10, 5, 33, 15);
+		PainelCad.add(LBnome);
+		LBnome.setFont(new Font("Verdana", Font.PLAIN, 11));
+		
+		TFnome = new JTextField();
+		TFnome.setBounds(53, 5, 86, 20);
+		PainelCad.add(TFnome);
+		TFnome.setHorizontalAlignment(SwingConstants.LEFT);
+		TFnome.setColumns(10);
+		
+		JLabel LBCateg = new JLabel("Categoria");
+		LBCateg.setBounds(159, 5, 56, 15);
+		PainelCad.add(LBCateg);
+		LBCateg.setFont(new Font("Verdana", Font.PLAIN, 11));
+		
+	
+		CBCateg.setModel(new DefaultComboBoxModel(new String[] {"Bolsas", "Cintos", "Carteiras", "Facas"}));
+		PainelCad.add(CBCateg);
+		CBCateg.setBackground(new Color(255, 255, 255));
+		
+		JLabel LBRef = new JLabel("Referência");
+		LBRef.setBounds(305, 5, 61, 15);
+		PainelCad.add(LBRef);
+		LBRef.setFont(new Font("Verdana", Font.PLAIN, 11));
+		
+		TFref = new JTextField();
+		TFref.setBounds(372, 5, 86, 20);
+		PainelCad.add(TFref);
+		TFref.setColumns(10);
+		
+		JLabel LBcod = new JLabel("Código");
+		LBcod.setBounds(472, 5, 40, 15);
+		PainelCad.add(LBcod);
+		LBcod.setFont(new Font("Verdana", Font.PLAIN, 11));
+		
+		TFCod = new JTextField();
+		TFCod.setBounds(522, 5, 86, 20);
+		PainelCad.add(TFCod);
+		TFCod.setColumns(10);
+		
+		JLabel LBQnt = new JLabel("Quant.");
+		LBQnt.setBounds(633, 5, 34, 14);
+		LBQnt.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		PainelCad.add(LBQnt);
+		
+		TFQNT = new JTextField();
+		TFQNT.setBounds(677, 5, 86, 20);
+		PainelCad.add(TFQNT);
+		TFQNT.setColumns(10);
+		
+		JLabel LBPreco = new JLabel("Preço");
+		LBPreco.setBounds(782, 5, 32, 15);
+		PainelCad.add(LBPreco);
+		LBPreco.setFont(new Font("Verdana", Font.PLAIN, 11));
+		
+		TFPreco = new JTextField();
+		TFPreco.setBounds(826, 5, 86, 20);
+		PainelCad.add(TFPreco);
+		TFPreco.setColumns(10);
+		
+		JButton BTNCadastrar = new JButton("Cadastrar");
+		BTNCadastrar.setBounds(792, 31, 122, 24);
+		PainelCad.add(BTNCadastrar);
 		BTNCadastrar.setIcon(new ImageIcon("C:\\Users\\Usuário\\eclipse-workspace\\ProjetoEncomendas\\ProjetoEncomendasV2\\src\\Imagens\\save_icon.png"));
 		BTNCadastrar.setVerticalAlignment(SwingConstants.BOTTOM);
 		BTNCadastrar.addActionListener(new ActionListener() {
@@ -110,90 +180,32 @@ public class ProdutoCadastro extends ProdutoLista {
 					DefaultTableModel TablePL = (DefaultTableModel) TabelaLista.getModel();
 					TablePL.addRow(new String[] {nome,CBcat,ref,cod, quant, preco});
 					
+				
+					TelaVenda TV = new TelaVenda();
+					if() {
+						
+						JOptionPane.showMessageDialog(this, 
+								"Produto salvo com sucesso!", "Sucesso", 
+								JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(this, 
+								"Não foi possível salvar! Tente mais tarde.", "Atenção", 
+								JOptionPane.ERROR_MESSAGE);
+					}
+					
+					dispose();
+				}
 					
 			
 		
 			}
 		});
-		BTNCadastrar.setBackground(new Color(255, 255, 255));
+		BTNCadastrar.setBackground(Color.YELLOW);
 		BTNCadastrar.setFont(new Font("Verdana", Font.PLAIN, 11));
-		
-		JButton BTNExcluir = new JButton("");
-		BTNExcluir.setIcon(new ImageIcon("C:\\Users\\Usuário\\eclipse-workspace\\ProjetoEncomendas\\ProjetoEncomendasV2\\src\\Imagens\\trashcan.png"));
-		BTNExcluir.setBounds(66, 0, 32, 32);
-		PainelSalvar.add(BTNExcluir);
-		
-		JPanel PainelCad = new JPanel();
-		PainelCad.setBackground(new Color(143, 188, 143));
-		PainelCad.setBounds(0, 378, 934, 33);
-		contentPane.add(PainelCad);
-		PainelCad.setLayout(null);
-		
-		JLabel LBnome = new JLabel("Nome");
-		LBnome.setBounds(10, 5, 33, 15);
-		PainelCad.add(LBnome);
-		LBnome.setFont(new Font("Verdana", Font.PLAIN, 11));
-		
-		TFnome = new JTextField();
-		TFnome.setBounds(53, 5, 86, 20);
-		PainelCad.add(TFnome);
-		TFnome.setHorizontalAlignment(SwingConstants.LEFT);
-		TFnome.setColumns(10);
-		
-		JLabel LBCateg = new JLabel("Categoria");
-		LBCateg.setBounds(159, 5, 56, 15);
-		PainelCad.add(LBCateg);
-		LBCateg.setFont(new Font("Verdana", Font.PLAIN, 11));
-		
-	
-		CBCateg.setModel(new DefaultComboBoxModel(new String[] {"Bolsas", "Cintos", "Carteiras", "Facas"}));
-		CBCateg.setBounds(219, 4, 76, 22);
-		PainelCad.add(CBCateg);
-		CBCateg.setBackground(new Color(255, 255, 255));
-		
-		JLabel LBRef = new JLabel("Referência");
-		LBRef.setBounds(305, 5, 61, 15);
-		PainelCad.add(LBRef);
-		LBRef.setFont(new Font("Verdana", Font.PLAIN, 11));
-		
-		TFref = new JTextField();
-		TFref.setBounds(372, 5, 86, 20);
-		PainelCad.add(TFref);
-		TFref.setColumns(10);
-		
-		JLabel LBcod = new JLabel("Código");
-		LBcod.setBounds(472, 5, 40, 15);
-		PainelCad.add(LBcod);
-		LBcod.setFont(new Font("Verdana", Font.PLAIN, 11));
-		
-		TFCod = new JTextField();
-		TFCod.setBounds(522, 5, 86, 20);
-		PainelCad.add(TFCod);
-		TFCod.setColumns(10);
-		
-		JLabel LBQnt = new JLabel("Quant.");
-		LBQnt.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		LBQnt.setBounds(633, 5, 34, 14);
-		PainelCad.add(LBQnt);
-		
-		TFQNT = new JTextField();
-		TFQNT.setBounds(677, 5, 86, 20);
-		PainelCad.add(TFQNT);
-		TFQNT.setColumns(10);
-		
-		JLabel LBPreco = new JLabel("Preço");
-		LBPreco.setBounds(782, 5, 32, 15);
-		PainelCad.add(LBPreco);
-		LBPreco.setFont(new Font("Verdana", Font.PLAIN, 11));
-		
-		TFPreco = new JTextField();
-		TFPreco.setBounds(826, 5, 86, 20);
-		PainelCad.add(TFPreco);
-		TFPreco.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportBorder(null);
-		scrollPane.setBounds(0, 32, 934, 344);
+		scrollPane.setBounds(0, 0, 920, 421);
 		contentPane.add(scrollPane);
 		
 		TabelaProd = new JTable();
@@ -214,3 +226,4 @@ public class ProdutoCadastro extends ProdutoLista {
 		scrollPane.setViewportView(TabelaProd);
 	}
 }
+

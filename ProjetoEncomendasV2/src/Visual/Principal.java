@@ -14,6 +14,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Canvas;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.BoxLayout;
 
 public class Principal extends JFrame {
 
@@ -30,13 +37,35 @@ public class Principal extends JFrame {
 	public Principal() {
 		setTitle("ProjetoLCM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1050, 660);
+		setBounds(100, 100, 1050, 631);
+		frmProjetoEncomendas = new JPanel();
+		frmProjetoEncomendas.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(frmProjetoEncomendas);
+		frmProjetoEncomendas.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel.setBounds(0, 16, 1, 1);
+		frmProjetoEncomendas.add(panel);
+		panel.setLayout(null);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(0, 0, 1034, 16);
+		frmProjetoEncomendas.add(panel_1);
+		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
+		
+		JPanel panel_2 = new JPanel();
+		panel_1.add(panel_2);
+		panel_2.setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
+		menuBar.setBounds(0, 0, 1034, 17);
+		panel_2.add(menuBar);
 		
 		JMenu MenuArquivo = new JMenu("Arquivo");
 		menuBar.add(MenuArquivo);
+		
 		
 		JMenuItem MASalvar = new JMenuItem("Salvar");
 		MenuArquivo.add(MASalvar);
@@ -99,25 +128,44 @@ public class Principal extends JFrame {
 		JMenuItem MPPronto = new JMenuItem("Pedidos Prontos");
 		MenuPedidos.add(MPPronto);
 		
+		JMenuItem MPRastreio = new JMenuItem("Rastrear Produto");
+		MPRastreio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				RastreioEncomenda RE = new RastreioEncomenda();
+				RE.setVisible(true);
+				
+				
+			}
+		});
+		MenuPedidos.add(MPRastreio);
+		
 		JMenu MenuDoc = new JMenu("Relatórios");
 		menuBar.add(MenuDoc);
 		
 		JMenuItem MDocVenda = new JMenuItem("Relatório de Venda");
 		MenuDoc.add(MDocVenda);
-		frmProjetoEncomendas = new JPanel();
-		frmProjetoEncomendas.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(frmProjetoEncomendas);
-		frmProjetoEncomendas.setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 1034, 599);
-		frmProjetoEncomendas.add(panel);
-		panel.setLayout(null);
 		
 		
 		
 		
 		
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }

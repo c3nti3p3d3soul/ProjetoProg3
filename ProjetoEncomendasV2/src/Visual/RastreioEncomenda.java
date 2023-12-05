@@ -4,10 +4,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import java.awt.Font;
 
 public class RastreioEncomenda extends JFrame {
@@ -18,7 +19,18 @@ public class RastreioEncomenda extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					RastreioEncomenda frame = new RastreioEncomenda();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -28,46 +40,60 @@ public class RastreioEncomenda extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 300);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5)		);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBounds(10, 11, 604, 106);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		JPanel Cod = new JPanel();
+		Cod.setBorder((Border) new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		Cod.setBounds(10, 11, 604, 106);
+		contentPane.add(Cod);
+		Cod.setLayout(null);
 		
-		JLabel CodRas = new JLabel("Insira seu código de rastreio:");
-		CodRas.setFont(new Font("Verdana", Font.PLAIN, 15));
-		CodRas.setBounds(10, 50, 228, 25);
-		panel.add(CodRas);
+		JLabel LBola = new JLabel("Olá,");
+		LBola.setFont(new Font("Dialog", Font.PLAIN, 14));
+		LBola.setBounds(10, 11, 67, 28);
+		Cod.add(LBola);
+		
+		JLabel Digite = new JLabel("Digite o código de Rastreio:");
+		Digite.setFont(new Font("Dialog", Font.PLAIN, 14));
+		Digite.setBounds(10, 50, 177, 28);
+		Cod.add(Digite);
 		
 		textField = new JTextField();
 		textField.setBounds(10, 75, 584, 20);
-		panel.add(textField);
+		Cod.add(textField);
 		textField.setColumns(10);
 		
-		JLabel ola = new JLabel("Olá, ");
-		ola.setFont(new Font("Verdana", Font.PLAIN, 15));
-		ola.setBounds(10, 11, 34, 14);
-		panel.add(ola);
+		JLabel LBusuario = new JLabel("");
+		LBusuario.setFont(new Font("Dialog", Font.PLAIN, 14));
+		LBusuario.setBounds(38, 11, 556, 28);
+		Cod.add(LBusuario);
+			
+		JPanel Local = new JPanel();
+		Local.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		Local.setBounds(10, 128, 604, 122);
+		contentPane.add(Local);
+		Local.setLayout(null);
 		
-		JLabel Nome = new JLabel("");
-		Nome.setFont(new Font("Verdana", Font.PLAIN, 15));
-		Nome.setBounds(45, 11, 549, 14);
-		panel.add(Nome);
+		JLabel L = new JLabel("Local:");
+		L.setBounds(10, 11, 57, 14);
+		Local.add(L);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_1.setBounds(10, 128, 604, 122);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
+		JLabel LBlocalatual = new JLabel("");
+		LBlocalatual.setBounds(91, 11, 46, 14);
+		Local.add(LBlocalatual);
 		
-		JLabel Local = new JLabel("Localização:");
-		Local.setFont(new Font("Verdana", Font.PLAIN, 15));
-		Local.setBounds(10, 11, 101, 14);
-		panel_1.add(Local);
+		JLabel D = new JLabel("Destino:");
+		D.setBounds(10, 48, 46, 14);
+		Local.add(D);
+		
+		JLabel LBdestino = new JLabel("");
+		LBdestino.setBounds(91, 48, 46, 14);
+		Local.add(LBdestino);
+		
+
+		
 	}
 }

@@ -10,7 +10,7 @@ public class Controle  {
 			public void run() {
 				try {
 					Login frame = new Login();
-					frame.setVisible(true);
+					frame.setVisible(true);	
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
